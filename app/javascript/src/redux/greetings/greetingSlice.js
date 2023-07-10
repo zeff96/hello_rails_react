@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  greetings: [],
+  greeting: [],
   isLoading: true,
   error: null
 }
@@ -12,7 +12,7 @@ export const getGreetingsAsync = createAsyncThunk(
   'greetings/Async',
   async() => {
     try{
-      const res = await fetch(res)
+      const res = await fetch(url)
       const data = await res.json()
       return data
     }catch(e){
@@ -28,17 +28,11 @@ const greetingSlice = createSlice({
     builder.addCase(getGreetingsAsync.pending, (state)=> ({
       ...state,
       isLoading: true
-    })).addCase(getGreetingsAsync.fulfilled, (state, action)=> {
-      const greetingList = action.payload.map((greeting)=> ({
-        id: greeting.id,
-        text: greeting.text
-      }))
-      return {
-        ...state,
-        greetings: greetingList,
-        isLoading: false
-      }
-    }).addCase(getGreetingsAsync.rejected, (state, action)=> ({
+    })).addCase(getGreetingsAsync.fulfilled, (state, action)=> ({
+      ...state,
+      greeting: action.payload,
+      isLoading: false
+    })).addCase(getGreetingsAsync.rejected, (state, action)=> ({
       ...state,
       isLoading: false,
       error: action.error.message
