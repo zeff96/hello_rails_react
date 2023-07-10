@@ -2,4 +2,13 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import React from 'react'
-import { ReactDOM } from "react-dom"
+import ReactDOM  from "react-dom"
+
+function App() {
+  return <h2>Hello rails</h2>
+}
+
+ReactDOM.render(
+  <App/>,
+  document.getElementById('root')
+);
