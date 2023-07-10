@@ -1,6 +1,7 @@
 class Api::MessagesController < ApplicationController
   def index
-    @greeting = Message.pluck(:name).sample
+    @greeting = Message.all.sample
 
     render json: @greeting
+  end
 end
